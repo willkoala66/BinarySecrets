@@ -68,6 +68,34 @@ bit 10-16 - unused for now. error correction /encyption key
 60 - *
 61 - )
 62 - (
+63 - A
+64 - B
+65 - C
+66 - D
+67 - E
+68 - F
+69 - G
+70 - H
+71 - I
+72 - J
+73 - K
+74 - L
+75 - M
+76 - N
+77 - O
+78 - P
+79 - Q
+80 - R
+81 - S
+82 - T
+83 - U
+84 - V
+85 - W
+86 - X
+87 - Y
+88 - Z
+89 - 
+90 - 
 
 
 
