@@ -5,7 +5,7 @@
 *Reverse binary and custom bit representation
 
 bit 1-8 - Numerical representation of the number
-bit 9 - Capial letter (0 for special characters)
+bit 9 - Capial letter (0 for special characters*) basicly just add 62 to get the int form 
 bit 10-16 - unused for now. error correction /encyption key
 
 1 - a
@@ -96,7 +96,18 @@ bit 10-16 - unused for now. error correction /encyption key
 86 - X
 87 - Y
 88 - Z
-
+89 - $
+90 - €
+91 - 1
+92 - 2
+93 - 3
+94 - 4
+95 - 5
+96 - 6
+97 - 7
+98 - 8
+99 - 9
+100 - 0
 
 
 
