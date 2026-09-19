@@ -1,6 +1,8 @@
 # BinarySecrets
 
-16-bit int
+16-bit*
+
+*Reverse binary and custom bit representation
 
 bit 1-8 - Numerical representation of the number
 bit 9 - Capial letter (0 for special characters)
@@ -54,7 +56,7 @@ bit 10-16 - unused for now. error correction /encyption key
 46 - |
 47 - \
 48 - `
-49 - ¬
+49 - ¬ Logical Not
 50 - =
 51 - +
 52 - -
@@ -94,8 +96,6 @@ bit 10-16 - unused for now. error correction /encyption key
 86 - X
 87 - Y
 88 - Z
-89 - 
-90 - 
 
 
 
