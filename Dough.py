@@ -1,5 +1,6 @@
 import enum
 import string
+import re
 
 class character:
         binform: str 
@@ -105,14 +106,41 @@ class Binlang:
         open_bracket = character("(", 62, "011111000")
         dollar_sign = character("$", 89, "110110001")
         euro_sign = character("€", 90, "001110001")
-        number_1 = character("1", 91, "110110100")
-        number_2 = character("2", 92, "001110100")
-        number_3 = character("3", 93, "101110100")
-        number_4 = character("4", 94, "011110100")
-        number_5 = character("5", 95, "111110100")
-        number_6 = character("6", 96, "000001100")
-        number_7 = character("7", 97, "100001100")
-        number_8 = character("8", 98, "010001100")
-        number_9 = character("9", 99, "110001100")
-        number_0 = character("0", 100, "001001100")
-        
+        # number_1 = character("1", 91, "110110100")
+        # number_2 = character("2", 92, "001110100")
+        # number_3 = character("3", 93, "101110100")
+        # number_4 = character("4", 94, "011110100")
+        # number_5 = character("5", 95, "111110100")
+        # number_6 = character("6", 96, "000001100")
+        # number_7 = character("7", 97, "100001100")
+        # number_8 = character("8", 98, "010001100")
+        # number_9 = character("9", 99, "110001100")
+        # number_0 = character("0", 100, "001001100")
+        # numbers as is due to 1's and 0's
+
+
+    def encode(self, mesg: str):
+        nospace = mesg.replace(self.chars.whitespace.value.charform, f"{self.chars.whitespace.value.binform} ")
+        a = nospace
+        for i in self.chars:
+            a.replace()
+        return a
+    def decode(self, mesg:str):
+        nospace = re.sub(self.chars.whitespace.value.binform + " ", f"{self.chars.whitespace.value.charform}", mesg)
+        a = nospace
+        for i in self.chars:
+            try:
+                a = re.sub(f"{i.value.binform} ", f"{i.value.charform}", a)
+            except re.PatternError:
+                pass
+        return a
+
+
+
+# access example
+#for i in Binlang.chars:
+#    print(i.value.charform)
+a = Binlang()
+b = input("Mesg: ")
+print(f"Mesg out: {a.encode(b)}")
+print(f"decode: {a.decode(a.encode(b))}")
