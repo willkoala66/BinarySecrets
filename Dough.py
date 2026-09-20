@@ -1,5 +1,4 @@
 import enum
-import numbers
 
 class character:
         binform: str 
@@ -157,8 +156,9 @@ class Binlang:
 # access example
 #for i in Binlang.chars:
 #    print(i.value.charform)
-a = Binlang()
-b = input("Mesg: ")
-enco = a.encode(b)
-print(f"Mesg out: {enco}")
-print(f"Deco: {a.decode(enco)}")
+if __name__ != "__main__":
+    a = Binlang()
+    b = input("Mesg: ")
+    enco = a.encode(b)
+    print(f"Mesg out: {enco}")
+    print(f"Deco: {a.decode(enco)}")
