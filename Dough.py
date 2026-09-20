@@ -1,6 +1,5 @@
 import enum
-import string
-import re
+import numbers
 
 class character:
         binform: str 
@@ -120,21 +119,39 @@ class Binlang:
 
 
     def encode(self, mesg: str):
-        nospace = mesg.replace(self.chars.whitespace.value.charform, f"{self.chars.whitespace.value.binform} ")
-        a = nospace
+        ltmesg = list(mesg)
+        val = self.chars.whitespace.value
+        for x, c in enumerate(ltmesg):
+            if ltmesg[x] == val.charform:
+                ltmesg[x] = f"{val.binform}0000000 "
         for i in self.chars:
-            a.replace()
-        return a
-    def decode(self, mesg:str):
-        nospace = re.sub(self.chars.whitespace.value.binform + " ", f"{self.chars.whitespace.value.charform}", mesg)
-        a = nospace
-        for i in self.chars:
-            try:
-                a = re.sub(f"{i.value.binform} ", f"{i.value.charform}", a)
-            except re.PatternError:
-                pass
-        return a
-
+            val = i.value
+            if not val.charform == " ":
+                for x, c in enumerate(ltmesg):
+                    if ltmesg[x] == val.charform:
+                        ltmesg[x] = f"{val.binform}0000000 "
+        return ''.join(ltmesg)
+    
+    def decode(self, mesg: str):
+        ltmesg = list(mesg)
+        char = ''
+        out = ''
+        for x, c in enumerate(ltmesg):
+            char = char + ltmesg[x]
+            #print(char)
+            #print(x)
+            #print(ltmesg[x])
+            for i in self.chars:
+                if char == i.value.binform+"0000000 ":
+                    out = out+i.value.charform
+                    char = ''
+                    break
+            # attempt at number support
+            #   if char == '1' or char == '2' or char == '3' or char == '4'or char== '5' or char == '6' or char == '7' or char == '8' or char == '9' or char == '0':
+            #   out = out+char
+        return out
+                    
+            
 
 
 # access example
@@ -142,5 +159,6 @@ class Binlang:
 #    print(i.value.charform)
 a = Binlang()
 b = input("Mesg: ")
-print(f"Mesg out: {a.encode(b)}")
-print(f"decode: {a.decode(a.encode(b))}")
+enco = a.encode(b)
+print(f"Mesg out: {enco}")
+print(f"Deco: {a.decode(enco)}")

@@ -1,5 +1,8 @@
 # BinarySecrets
 
+no number support*
+decodeing only
+
 16-bit*
 
 *Reverse binary and custom bit representation
