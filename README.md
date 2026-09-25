@@ -1,7 +1,8 @@
 # BinarySecrets
 > # bake-messageing
 > flask web app for messageing no js only jdango and python
-
+> url.com/app/<sessionId>/<chatId>
+> url.com/app/<sessionId>/profile
 
 
 

@@ -156,7 +156,7 @@ class Binlang:
 # access example
 #for i in Binlang.chars:
 #    print(i.value.charform)
-if __name__ != "__main__":
+if __name__ == "__main__":
     a = Binlang()
     b = input("Mesg: ")
     enco = a.encode(b)
