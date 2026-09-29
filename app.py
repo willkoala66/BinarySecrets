@@ -18,6 +18,8 @@ def create_app(test_config=None):
     import db
     db.init_app(app)
 
+    import index
+    app.register_blueprint(index.bp)
 
     return app
 
