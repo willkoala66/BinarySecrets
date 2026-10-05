@@ -69,7 +69,7 @@ def login():
 
         if error is None:
             session.clear()
-            session['user_id'] = user['id']
+            session['user_id'] = user['userid']
             return redirect(url_for('index'))
 
         flash(error)

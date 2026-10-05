@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS chats;
+DROP TABLE IF EXISTS messages;
 
 CREATE TABLE user (
   userid INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -8,13 +9,9 @@ CREATE TABLE user (
 );
 
 CREATE TABLE chats (
-  chatid INTEGER PRIMARY KEY,
-  FOREIGN KEY (userid) REFERENCES user(userid)
+  chatid INTEGER PRIMARY KEY AUTOINCREMENT,
+  users TEXT NOT NULL,
+  chatname TEXT NOT NULL,
+  iconpath TEXT,
+  messages TEXT NOT NULL
 );
-
-CREATE TABLE messages (
-
-)
-// varbinary(max)
-// work on later
-// need message, time sent, chat, who,  
