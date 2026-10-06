@@ -3,6 +3,7 @@ import os
 import sys
 sys.path.append(".")
 
+
 def create_app(test_config=None):
     app = flask.Flask(__name__ , instance_relative_config=True)
     app.config.from_mapping(SECRET_KEY='dev', DATABASE=os.path.join(app.instance_path, 'baked.sqlite'),)
@@ -18,8 +19,13 @@ def create_app(test_config=None):
     import db
     db.init_app(app)
 
-    import index
-    app.register_blueprint(index.bp)
+    app.add_url_rule('/', endpoint='index')
+    @app.endpoint('index')
+    def index():
+        return flask.render_template("index.html")
+    
+    import auth
+    app.register_blueprint(auth.bp)
 
     return app
 
