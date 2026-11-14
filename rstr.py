@@ -17,11 +17,14 @@ def check_string(keyin_a: str, keyin_b:str) -> bool:
     key_a2 = keys_a[65:]
     key_b1 = keys_b[:64]
     key_b2 = keys_b[65:]
-    if not 
+    if key_a1 != key_b1 and key_a2 != key_b2:
+        return False
+    else:
+        return True
 
 def getSessionArgs(login: bool):
     if login:
-        newCode: str = create_string()
+        newCode: str = str(create_string())
         flask.session['authCode'] = newCode
         flask.session.new = False
         flask.session.modified = True
