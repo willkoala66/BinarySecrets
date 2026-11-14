@@ -19,6 +19,8 @@ def check_string(keyin_a: str, keyin_b:str) -> bool:
     key_b2 = keys_b[65:]
     if key_a1 != key_b1 and key_a2 != key_b2:
         return False
+    elif key_a1 != key_b1 or key_a2 != key_b2:
+        return False
     else:
         return True
 

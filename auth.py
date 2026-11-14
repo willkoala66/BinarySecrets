@@ -96,7 +96,7 @@ def login_required(view):
         authCodeClear = False
         from app import authcodes as authcodes
         for i in authcodes.get_auth():
-            if i == rstr.getSessionArgs(False):
+            if rstr.check_string(i ,rstr.getSessionArgs(False)):
                 authCodeClear = True
             else:
                 authCodeClear = False
