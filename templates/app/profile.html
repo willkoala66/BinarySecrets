@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{%block header%}
+<h1>{% block title %}{{username}}'s Profile Page{%endblock%}</h1>
+{%endblock%}
+
+{% block content %}
+<h2>User Info</h2>
+<a href="{{url_for("webapp.pfpchange")}}" class="pfpchange">
+<img src="{{pfp_href}}" class="pfp">
+</a>
+<p class="userdetails" >
+    Username: {{username}}</br>
+    Email: {{email}}</br>
+</p>
+
+
+{% endblock %}

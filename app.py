@@ -3,10 +3,13 @@ import os
 import sys
 sys.path.append(".")
 
+from auth import authcodes
+authcodes = authcodes()
+
 
 def create_app(test_config=None):
     app = flask.Flask(__name__ , instance_relative_config=True)
-    app.config.from_mapping(SECRET_KEY='dev', DATABASE=os.path.join(app.instance_path, 'baked.sqlite'),)
+    app.config.from_mapping(SECRET_KEY='dev', DATABASE=os.path.join(app.instance_path, 'baked.sqlite'))
     if test_config is None:
         # load the instance config, if it exists, when not testing
         app.config.from_pyfile('config.py', silent=True)
@@ -24,8 +27,11 @@ def create_app(test_config=None):
     def index():
         return flask.render_template("index.html")
     
+    
     import auth
     app.register_blueprint(auth.bp)
+    import webapp
+    app.register_blueprint(webapp.bp)
 
     return app
 

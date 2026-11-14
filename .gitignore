@@ -2,3 +2,6 @@ __pycache__/
 instance/
 .venv/
 ignored/
+static/uploads/pfps/
+static/uploads/chaticons/
+static/uploads/attachments/

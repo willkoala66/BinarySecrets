@@ -1,11 +1,13 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS chats;
-DROP TABLE IF EXISTS messages;
 
 CREATE TABLE user (
   userid INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL
+  password TEXT NOT NULL,
+  email TEXT NOT NULL,
+  pfp_path TEXT NOT NULL,
+  chats TEXT NOT NULL
 );
 
 CREATE TABLE chats (

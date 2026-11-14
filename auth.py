@@ -7,7 +7,20 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from db import get_db
 
+import rstr
+
+class authcodes:
+    authCodes = []
+        
+    def get_auth(self):
+        return self.authCodes
+    def add_auth(self, auth):
+        self.authCodes.append(auth)
+    
+
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+
 
 @bp.before_app_request
 def load_logged_in_user():
@@ -23,9 +36,11 @@ def load_logged_in_user():
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
+    
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        email = request.form['email']
         db = get_db()
         error = None
 
@@ -36,13 +51,10 @@ def register():
 
         if error is None:
             try:
-                db.execute(
-                    "INSERT INTO user (username, password) VALUES (?, ?)",
-                    (username, generate_password_hash(password)),
-                )
+                db.execute("INSERT INTO user (username, password, email, pfp_path, chats) VALUES (?, ?, ?, ?, ?)",(username, generate_password_hash(password), email, "/static/uploads/pfps/eggbert.png", "{'chats':[]}"))
                 db.commit()
-            except db.IntegrityError:
-                error = f"User {username} is already registered."
+            except db.IntegrityError as x:
+                error = f"User {username} is already registered.: {x.sqlite_errorname}"
             else:
                 return redirect(url_for("auth.login"))
 
@@ -70,6 +82,8 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['userid']
+            from app import authcodes as authcodes
+            authcodes.add_auth(rstr.getSessionArgs(True))
             return redirect(url_for('index'))
 
         flash(error)
@@ -79,7 +93,14 @@ def login():
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if g.user is None:
+        authCodeClear = False
+        from app import authcodes as authcodes
+        for i in authcodes.get_auth():
+            if i == rstr.getSessionArgs(False):
+                authCodeClear = True
+            else:
+                authCodeClear = False
+        if g.user is None and not authCodeClear:
             return redirect(url_for('auth.login'))
 
         return view(**kwargs)
