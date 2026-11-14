@@ -51,7 +51,7 @@ def register():
 
         if error is None:
             try:
-                db.execute("INSERT INTO user (username, password, email, pfp_path, chats) VALUES (?, ?, ?, ?, ?)",(username, generate_password_hash(password), email, "/static/uploads/pfps/eggbert.png", "{'chats':[]}"))
+                db.execute("INSERT INTO user (username, password, email, pfp_path, chats) VALUES (?, ?, ?, ?, ?)",(username, generate_password_hash(password), email, "/uploads/pfps/eggbert.png", "{'chats':[]}"))
                 db.commit()
             except db.IntegrityError as x:
                 error = f"User {username} is already registered.: {x.sqlite_errorname}"

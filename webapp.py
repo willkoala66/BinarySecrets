@@ -57,7 +57,7 @@ def profile_page():
     userinfo = db.execute(f"SELECT * FROM user WHERE userid = {userid}").fetchall()
     username = userinfo[0]['username']
     email = userinfo[0]['email']
-    pfp_path = url_for('static',filename=userinfo[0]['pfp_path'])
+    pfp_path = userinfo[0]['pfp_path']
     return flask.render_template("app/profile.html", authCode=authCode, userid=userid, username=username, email=email, pfp_href=pfp_path)
     
 @bp.route("/profile/pfpchange", methods=["GET", "POST"])
