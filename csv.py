@@ -11,7 +11,7 @@ class CSVParser:
             csv_formated_input (str): The CSV formatted String Input
 
         Returns:
-            list (list<list\<str\>>)): the 2D array Of the Input 
+            CSVArray (list (list (str)))): the 2D array Of the Input 
         """
         f = csv_formated_input
         x = f.splitlines()
@@ -69,6 +69,30 @@ class CSVBuilder:
             out_str = out_str + "\n"
         return out_str
     
+    def build_CSV_2D(self, data: list):
+        """makes a CSV formatted string from a 2D array
+
+        Args:
+            data (list):  The 2D array of the data
+
+        Raises:
+            ValueError: incorrect Data format
+
+        Returns:
+            String (str): CSV formatted string
+        """
+        if len(data) != self.colums:
+                    raise ValueError
+        for colum in data:
+            if len(colum) != self.rows:
+                raise ValueError
+        out_str = ""
+        for col in data:
+            for row in col:
+                out_str = out_str + f"{row},"
+            out_str = out_str + "\n"
+        return out_str
+    
 if __name__ == "__main__":    
     c = CSVParser()    
     b  = c.parse_str("abcd,efgh\nhijk,lmnop")
@@ -79,3 +103,4 @@ if __name__ == "__main__":
     cb.add_colum(2)
     cb.add_row(2)
     print(cb.build_CSV_1D(cars))
+    print(cb.build_CSV_2D(b))
