@@ -1,8 +1,13 @@
+class ValueNotFound:
+    def __init__(self, value, data):
+        self.value = value
+        self.data = data
+
 class CSVParser:
     """ A simple CSV parser
     """
     def __init__(self):
-        pass
+        pass 
     
     def parse_str(self, csv_formated_input: str):
         """ Parses a CSV formatted String and returns a 2D Array of it
@@ -47,7 +52,7 @@ class CSVBuilder:
             String (str): CSV formatted string
         """
         if len(data) != self.rows * self.colums:
-            raise ValueError
+            raise ValueError(data)
         out = []
         for z in range(self.rows):
             out.append(["" for j in range(self.colums)])
@@ -82,16 +87,44 @@ class CSVBuilder:
             String (str): CSV formatted string
         """
         if len(data) != self.colums:
-                    raise ValueError
+                    raise ValueError(data)
         for colum in data:
             if len(colum) != self.rows:
-                raise ValueError
+                raise ValueError(data)
         out_str = ""
         for col in data:
             for row in col:
                 out_str = out_str + f"{row},"
             out_str = out_str + "\n"
         return out_str
+    
+    
+    
+def find_val(CSV: list, val: str):
+    """Find a value in a 2D array
+
+    Args:
+        CSV (list): 2D array
+        val (str): String value to find
+
+    Raises:
+        ValueNotFound: Value not found in dataset
+
+    Returns:
+        2D array (list (list[Colum, Row])): 2D array of instances found in dataset
+    """
+    cols = 0
+    rows = 0
+    vals = []
+    for col in CSV:
+        for row in col:
+            if row == val:
+                vals.append( [cols, rows])
+            rows += 1
+        cols += 1
+    if len(vals) == 0:
+        raise ValueNotFound(val, CSV)
+    return vals
     
 if __name__ == "__main__":    
     c = CSVParser()    
